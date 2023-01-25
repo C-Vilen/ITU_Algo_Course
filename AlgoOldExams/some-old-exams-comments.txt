@@ -1,0 +1,411 @@
+110530
+======
+
+3c has an error: all answers contain E twice
+- corrected 
+
+150819
+======
+
+1a. Right answer: B.
+Because (N+1)+(N+2)+(N+3) = 3N + 6 ~ 3N
+
+1b. Right answer: B. In fact, (N+1)(N+1)(N+1) ~ N^3, so in particular it is big-Oh
+(Not a super-good exercise because it makes the difference between ~ and O unclear.)
+
+1c. Right answer: C.
+In fact, the answer is = N, so in particular it is ~ N.
+
+1d. Right answer: D.
+Exactly 1+...+N start are printed, which is = N(N-1)/ 2 ~ N^2/2 = O(N^2)
+
+1e. Right answer: D
+An equivalent way to give the answer is O(N^3).
+A more precise expression would be ~ N^3.
+Don't get confused by the bodies of the loops, the answer would be the same if it said A[i] = N.
+
+1f. Right answer: B
+
+1g. C
+Such a sequence has length a power of 2.
+(So that the last call activates the if-clause and leads to N stars being printed.)
+
+1h. Right answer: A
+In the best case, no stars are printed. (For instance, the empty sequence would be a perfectly valid answer. But also a length 524124135 sequence would not produce any stars after the last call. Only sequences of length a power of 2 produce stars at the last call.)
+
+1i: Right answer: C
+The total number of stars is linear in N. (In fact I think it's ~2N.)
+
+1j: Right answer: A
+This follows from i.
+
+2a: Right answer: A
+
+2b: There infinitely many correct answers. Here are some:
+int[] B = {}
+int[] B = {1}
+int[] B = {1,2,4,5,6,7,8}
+
+2c: Right answer A
+In other words, A is a subset of B.
+
+2d: Right answer: O(NM)
+
+2e: Many ways of doing this, and many ways of explaining it. Here's a very short answer that I would give full points for. "Sort B. Then scan through A linearly and use binary search [SW, page blabla] to locate A[i] in B. Total time O((N+M) log M). Even faster (in practice): build a hash table for B. Time O(N+M).".
+
+2f:
+
+Many solution, including cute ones with two pointers into sorted lists. Here's one using a symbol table:
+
+Build a symbol table for B, mapping key i to count(i). This is done by a single pass tthrough B, like this:
+
+	for (b in B): S.put(b, S.contains(b) ? S.get(b)+1 : 0)
+
+Then pass through A once, looking up each a in A and decreasing the counter.
+	
+	if (S.contains(a)): S.put(S.get(a)-1)
+	else return false
+
+Depending on the implementation of the symbol table, this takes linear time in N+M.
+
+2g:
+
+return max (A) < min (B).
+
+Linear time.
+
+
+3a. Two ways of doing it, since the exercise underspecifies the heap order. Full points for both.
+
+3b. D
+
+3c. Good luck.
+
+3d. B.
+(Recall that the asymptotic worst-case performance of both is quadratic. Insertion sort is linear on sorted input. Quicksort uses some extra space to manage the recursive calls.)
+
+3e. Good luck.
+
+4.a
+
+Something like this:
+return sort(dist(x1,y1), dist(x2,y2))  == [1,2];
+
+where dist(a,b) = abs(a-b) computes the absolute distance between its inputs.
+
+And then make proper Java out of this idea.
+
+Constant time.
+
+4b:
+Build a graph with NM vertices called (i,j) for 1<=i<=M and 1<=j<=M.
+Two vertices (x1,y1) and (x2,y2) are adjacent iff valid(N,M,x1,y1,x2,y2).
+This takes O((NM)^2) time to build naively.
+A faster way is to connect (x,y) to its 8 neighbours 
+
+	(x+1,y+2), (x-1,y+2), [and so on] , (x-2,y-1)
+
+provided they exist. Then the construction takes only O(NM) time.
+
+Now the reachability query can be answered in time O(NM) using breadth first search [SW, page blabla]. Note that the number of edges in the graph is at most 8NM.
+
+[Avoid the pitfall of answering O(N+M)!!!)
+ 
+
+150529
+======
+1a a
+1b a
+1c b
+1d c
+1e c
+1f d
+1g a
+1h b
+2a d
+2c b
+2d b
+2e d
+2f b
+3a c
+3b b
+3d d
+3g d
+
+Comments
+--------
+
+2g 
+--
+
+This is arguably underspecified. The intended meaning was the remove the element {i} from the set containing it, so that {1,3,6,8} with i = 6 becomes {1,3,8} and {6}. However, it would be consistent with the formulation in the question to split the set in three: {1,3}, {6}, {8}. In fact, nowhere does the exercise say what happens to the other sets, so turning the entire family into singletons would also solve the questions. I’ve been lenient in marking this.
+
+The fast way takes constant time, but it can be done very slowly (by linear search) as well.
+
+2h
+--
+
+Introduce a counter ctr of singletons. Intially ctr = N. With each update, ctr is decreased by 0, 1, or 2, after checking if the arguments are singletons (constant time). Then existsIsolated() is returns ctr > 0.
+
+There are linear time and even quadratic time solutions as well, they reveice 1 and 1/2 point, respectively.
+
+2i
+--
+
+Use a doubly linked cycle instead of a doubly linked list as the underlying data structure. Unioning two cycles is just a constant number of pointer manipulations. Find needs to be slightly changed as well.
+
+4a
+--
+
+Store the snakes and ladders in a symbol table T, with head/bottom as keys and tail/top as values. Let pos = 1. Iterate over the die rolls: for the ith roll, add d[i] to pos. Look up pos in T; if it exists replace it by the value stored at T[pos]. Assuming constat look-up time for T, this takes time O(r).
+
+In python:
+
+K = 30
+S= [(17,4), (21,9), (19,7), (27,1)]
+L= [(11,26), (3,22), (5,8), (20,29)]
+
+def check((K,S,L), D):
+	pos = 1
+	snadders = dict(S+L)
+	for d in D:
+		pos += d
+		if pos in snadders: pos = snadders[pos]
+	return (pos >= K)
+
+There is a far slower solution that runs linear in the graph size. I called this the “trivial solution” and have given 1 point for it.
+
+4b
+--
+
+Straight-up BFS, the only twist is to replace a vertex by the tail of its snake or head of its ladder.
+One can explain that by weight 0 edges (but then one is tempted to use Dijsktra and lose points for bad running time).
+
+Here’s the direct approach in Python:
+
+def solve((K,S,L)):
+	snadders = dict(S+L)
+
+	pred = {} # pred[pos] = (prev, die) means we got from prev to pos rolling die
+	Q = deque([1])
+	while Q:  # straight-up BFS
+		here = Q.popleft()
+		if (here >= 30): # reached the end?
+			dice = []    # init seq of die rolls used to get to here
+			while (here != 1):
+				(prev, die) = pred[here] # use pred dict to walk back
+				dice.append(die)		 # append die roll
+				here = prev
+			dice.reverse()                   
+			return dice
+		for d in [1,2,3,4,5,6]:
+			pos = here + d
+			if pos in snadders: pos = snadders[pos]
+			if not pos in pred:
+				pred[pos] = (here,d)
+				Q.append(pos)
+
+
+140821
+======
+1a  C 
+1b  B 
+1c  C 
+1d  B 
+1e  C 
+1f  A 
+1g  C 
+2a  B 
+2c  B 
+2d  D 
+2e  C 
+2f  C 
+3a  C 
+3b  B 
+3g  A 
+
+140528
+======
+
+1a B 
+1b A 
+1c D 
+1d B 
+1e D 
+1f C 
+2a D 
+2c D 
+2d B 
+2e A 
+2f C 
+2i D 
+3a D 
+3b A 
+3f C 
+
+Solutions to free-form questions in BADS 140528
+-----------------------------------------------
+
+(The “Notes” below refer to typical errors made by students and were used to mark the individual answer sheets in order to summarise this to the external examiner and agree on consistent grading for typical mistakes. It’s still interesting to see what kind of mistakes can be made, so I left that part in.)
+
+##2b
+
+    keys = { "A", "B", null, null, null}
+    vals = { 13, 15, null, null, null}
+
+    N = 2
+
+The point is that there are two occupied cells and that vals[1] contains 15 (not 14). Also, N is 2, not 3.
+
+Comments:
+There are many ways of drawing this, typically as a table.
+The contents of cells 2-4 are not really well defined, some
+students put 0s in the untouched cells of vals, as if it had type int[] instead of Object[]. I think that's ok haven't marked that.
+
+Notes:
+C: correct
+N: forgets to tell me what N is, or gets it wrong.
+
+##2g
+
+	After line 6:
+	int num_elems;
+	int size() { return num_elems; }
+
+	After line 23:
+	if (val == NULL) --num_elems; // removed an element
+
+	Line 26:
+	{ vals[i] = val; if (val == NULL) ++num_elemens; return }
+
+    After line 29:
+    ++num_elems;
+
+Comments:
+This turned out to be a trick question: Most students didn't see the detail about using put with a NULL element, which is the book's convention for handling delete.
+This wasn't *meant* to be a trick question, I even mentioned NULL
+in the formulation.    
+
+Notes:
+C: correct
+N: ignores val == NULL case
+
+##2h
+
+    After line 23:
+    int L = keys.lenght
+    if (N == L)
+    {
+    	Key[] tk = new (Key [])   new Object (2*L);
+    	Key[] tv = new (Value []) new Object (2*L);    
+    	for (int i = 0; i < L; ++i)
+    	{ tk[i] = keys[i]; tv[i] = vals[i];}
+    	keys = tk; vals = tv;
+    }
+
+Comments:
+Most get this right. 
+
+Notes:
+C: correct
+R: just calls the book's resize(), which won't work (there are two arrays, not one, and they're not called a)
+L: loses data by overwriting the contents of the original arrays
+
+##2j
+
+The point of this question is that the asymptotic running time of put() is not changed. (It is still linear in N, both the in the amortized and worst-case sense, because put needs to inspect a linear number of keys, no matter if resize is called or not.)
+
+Notes:
+C: correct
+A: doesn't mention asymptotic performance at all
+I: incomplete (say, doesn't tell me the time of put(), only the amortized time of resize())
+B: buggy in various ways (say, constant time for put())
+Q: says that put() has worst-case quadratic running time
+
+##3c
+         4
+        / \
+       /   \
+      2     6   
+     / \   / \
+    1   3 5   7
+
+Comment: This seems to have been easy, no idea why
+
+##3d
+
+    DGOIZZLA
+    ADGZILLO
+
+Notes:
+B: buggy, typically gets one of the answers slightly wrong
+
+##3e
+
+        +-+-+  +-+-+
+st[0] = |U|5|->|A|2|
+        +-+-+  +-+-+
+
+        +-+-+
+st[1] =	|Q|4|
+        +-+-+
+
+        +-+-+
+st[2] =	|M|3|
+        +-+-+
+
+        +-+--+  +-+-+  +-+-+  +-+-+
+st[3] =	|N|11|->|I|9|->|S|7|->|X|1|
+        +-+--+  +-+-+  +-+-+  +-+-+
+
+
+        +-+--+  +-+-+  +-+-+
+st[4] = |O|10|->|T|8|->|E|6|
+        +-+--+  +-+-+  +-+-+
+
+
+The important thing is E:6; it must appear at the end and there must not be an element corresponding to E:0 (which was inserted earlier and must get overwritten at this time).
+There are various ways of drawing this. One could include the "first" pointer of the indiviual lists. One could inlude st[5] and st[6], both of which point to the empty list.
+
+Comments:
+C: correct
+L: lists are reverted (so E:6 appears at the front, e.g.). This is not how the book (or anybody else) implements lists.
+-: All other answers are marked wrong, in particular if there are two E's
+
+##2g
+
+    B's right subtree:
+
+         G
+        / \
+       D   H
+      / \  |\
+     C   E
+    / \ / \
+
+##4a    
+
+    Find a minimum spanning tree T using and MST algorithm such as Prim's or Kruskals (time O(E log V)).
+    Determine the unique path P from s to t in T using BFS or DFS (time O(E+V)).
+    Return the largest value of the edges on P (time O(V)).
+    Running time is dominated  by the first part, so O(E log V).
+
+There are a few ways to be slightly smarter by terminating the MST algorithm as soon as s and t are connected. For instance, the last edge added using Kruskal will have the desired value. (This requires repeated checking if s and t are connected, of course, and may not make the algorithm that much smarter after all...) 
+
+Another solution (call it the iterative solution) is to run BFS (or DFS) on the subgraph consisting of edges smaller than a threshold t, where t runs through all edge weights in order. This requires sorting the edge weights. Running time would be asymptotoic in  E log E + V(V+E) = VE, pretty slow. One could be clever and use union-find for a faster result.
+
+What doesn't work is to just run BFS "keeping track of the smallest weight needed" of "always taking the smallest edge".
+
+Some students reinvent Prim's algorithm by viewing it as "Dijkstra with a modified distTo[]". This is not wrong in principle (even though it displays lack of familiarity with algorithms in the curriculum: if you modify Dijkstra's algorithm to become Prim's you should formulate it as "just use Prim's algorithm".) But most students are not sufficiently precise to explain what they do. In particular, *which* edge is chosen? How are they stored? What does *reach* mean in "the smallest cleareance to reach the vertex"? (After all, that's what we try to determine in the first place, so don't use that formulation to explain how the algorithm works.)
+
+Another wrong solution is to assume that c is already known (instead of finding it). Then the answer would indeed be to just throw away all costlier edges and run BFS. But c is *not* known, instead it's what we try to find. (In other words, the student solves the decision problem, not the search problem.)
+
+Notes:
+W: "Where does c come from?" Assumes c is known.
+T: forgets running time or gets it wrong
+M: magical algorithm where BFS is able to pick the right, cheap, edge from an unspecified set. Typical formulations "keeping track of clearance level" or "using cheaper edges first"
+D: Modifies Dijkstra correctly to reinvent Prim's algorithm
+U: Uses iterated union-find
+C: correct
+-: no answer, or looks completely wrong
+
