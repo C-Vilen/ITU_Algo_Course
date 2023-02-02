@@ -19,7 +19,6 @@ public class OneOneFourteen {
 
         // Returns the current power of 2
         return logInt;
-
     }    
 
     public static void main(String[] args) {
