@@ -2,7 +2,7 @@ package KattisAssignments.Grades;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.Insertion;
+import edu.princeton.cs.algs4.Merge;
 
 public class Grades implements Comparable<Grades> {
 
@@ -12,13 +12,13 @@ public class Grades implements Comparable<Grades> {
     Grades(String studentName, String studentGrade) {
         this.studentName = studentName;
         for (int i = 0; i < studentGrade.length(); i++) {
-            if (studentGrade.charAt(i) == 'A') { this.studentScale = 20;}
-            if (studentGrade.charAt(i) == 'B') { this.studentScale = 17;}
-            if (studentGrade.charAt(i) == 'C') { this.studentScale = 14;}
-            if (studentGrade.charAt(i) == 'D') { this.studentScale = 11;}
-            if (studentGrade.charAt(i) == 'E') { this.studentScale = 7;}
-            if (studentGrade.charAt(i) == 'X') { this.studentScale = 4;}
-            if (studentGrade.charAt(i) == 'F') { this.studentScale = 1;}
+            if (studentGrade.charAt(i) == 'A') { this.studentScale = 350;}
+            if (studentGrade.charAt(i) == 'B') { this.studentScale = 300;}
+            if (studentGrade.charAt(i) == 'C') { this.studentScale = 250;}
+            if (studentGrade.charAt(i) == 'D') { this.studentScale = 200;}
+            if (studentGrade.charAt(i) == 'E') { this.studentScale = 150;}
+            if (studentGrade.charAt(i) == 'X') { this.studentScale = 100;}
+            if (studentGrade.charAt(i) == 'F') { this.studentScale = 50;}
             if (studentGrade.charAt(i) == '+') { this.studentScale++;}
             if (studentGrade.charAt(i) == '-') { this.studentScale--;}
         }
@@ -42,7 +42,9 @@ public class Grades implements Comparable<Grades> {
         }
 
         // Sort
-	    Insertion.sort(SG);	
+        Merge.sort(SG);
+	    // Insertion.sort(SG);	
+        // Selection.sort(SG);
 
         // Output name order by grade
         for (int j = 0; j < N; ++j) {
