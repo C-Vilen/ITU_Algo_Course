@@ -80,8 +80,10 @@ public class WeekFour {
          * Which method runs faster for an array with all keys identical, selection sort or insertion sort?
          * 
          * 
-         * Insertion sort because it will only make one comparison with the previous element (per element) and won't exchange any elements, 
-         * running in linear time. Selection sort will exchange each element with itself and will run in quadratic time.
+         * Insertion sort will only compare the previous element for each element in the array, 
+         * where selection sort will need to go thorugh the whole array for each element and see if there exist an element that is smaller.
+         * Accordingly, insert sort will most likely run in linear time,
+         * And selection will run in quadratic time
          */
 
 
@@ -102,7 +104,8 @@ public class WeekFour {
          * 
          * 
          * Quadratic. Insertion sort's running time is linear when the array is already sorted or all elements are equal.
-         * With three possible values the running time quadratic.
+         * With three possible values the running time quadratic. It is possible that the array is partially sorted or nearly sorted, 
+         * which would reduce the number of comparisons and make the running time closer to linear.
          */
 
 
@@ -112,12 +115,11 @@ public class WeekFour {
          * 
          * 
          * 1. Initialize an empty queue to hold the merged result.
-         * 2. Dequeue the first item from each input queue.
-         * 3. Compare the dequeued items.
-         * 4. Enqueue the smaller item into the result queue and enqueue the larger item back into its original queue.
+         * 2. peek the first item from each input queue.
+         * 3. Compare the peeked items.
+         * 4. Enqueue the smaller item into the result queue.
          * 5. Repeat steps 2-4 until one of the input queues is empty.
-         * 6. Enqueue the remaining items in the non-empty input queue into the result queue.
-         * 7. The result queue is now the merged and sorted queue.
+         * 6. The result queue is now the merged and sorted queue.
          */
 
 
@@ -130,38 +132,41 @@ public class WeekFour {
          * 
          * I would use selection sort, comparing the cards first by suit, and if they have the same suit, by rank.
          * As we are dealing with physical objects it makes sense to minimize the number of swaps.
-         * With selection sort it may be needed to look at more cards than insertion sort (twice as many in the average case)
+         * With selection sort it may be needed to look at more cards than insertion sort (twice as many in the average case).
          */
 
 
         /*
          * 2.2.17
-         * Implement a natural mergesort for linked lists. Use only
-         * constant amount of extra space and linearithmic time.
+         * Implement a natural mergesort for linked lists. Use only constant amount of extra space and linearithmic time.
+         * 
+         * 
          */
 
 
         /*
          * 2.1.14
-         * Explain how you would sort a deck of cards, with the restriction
-         * that the only allowed operations are to look at the values of the top two
-         * cards, to exchange the
-         * top two cards, and to move the top card to the bottom of the deck.
+         * Explain how you would sort a deck of cards, with the restriction that the only allowed operations are to
+         * look at the values of the top two cards, to exchange the top two cards, and
+         * to move the top card to the bottom of the deck.
+         * 
+         * 1. I would compare both top cards and, if the top card were bigger than the second card, I would swap them.
+         * 2. I would mark the top card, so I could know it was the first card (in this iteration) sent to the bottom of the deck.
+         * 3. I would send the top card to the bottom of the deck.
+         * 4. I would repeat steps 1 and 3 until the marked card becomes the second card in the deck
+         * 5. I would send the top card to the bottom of the deck (and the marked card is now at the top, signaling that a iteration is over)
+         * 6. If there were no swaps in this iteration, the deck is sorted. Otherwise, repeat steps 1 to 6.
          */
 
 
         /*
          * 2.2.16
-         * Write a version of bottom-up mergesort that takes ad-
-         * vantage of order in the input array by using the following idea: Use one
-         * additional array of the
-         * same length as the input. Work in rounds, in each round repeatedly identify
-         * two sorted subarrays
-         * in one array by scanning (incrementing a pointer as long as the pointed at
-         * cell and its neighbor
-         * are sorted), then merge these into the other array. Analyze the running time
-         * in terms of the
-         * array length and the number of maximal increasing sequences in the array.
+         * Write a version of bottom-up mergesort that takes ad vantage of order in the input array by using the following idea: 
+         * Use one additional array of the same length as the input. Work in rounds, in each round repeatedly identify two sorted subarrays in one array by scanning 
+         * (incrementing a pointer as long as the pointed at cell and its neighbor are sorted), then merge these into the other array. 
+         * Analyze the running time in terms of the array length and the number of maximal increasing sequences in the array.
+         * 
+         * 
          */
 
 
