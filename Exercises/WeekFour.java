@@ -82,8 +82,7 @@ public class WeekFour {
          * 
          * Insertion sort will only compare the previous element for each element in the array, 
          * where selection sort will need to go thorugh the whole array for each element and see if there exist an element that is smaller.
-         * Accordingly, insert sort will most likely run in linear time,
-         * And selection will run in quadratic time
+         * Accordingly, inserttion sort will most likely run in linear time, and selection will run in quadratic time
          */
 
 
@@ -91,9 +90,8 @@ public class WeekFour {
          * 2.1.7
          * Which method runs faster for an array in reverse order, selection sort or insertion sort?
          * 
-         * 
          * Selection sort because even though both selection sort and insertion sort will run in quadratic time, 
-         * selection sort will only make N exchanges, while insertion sort will make N * N / 2 exchanges.
+         * selection sort will only make N exchanges, while insertion sort will make N^2 / 2 exchanges.
          */
 
 
@@ -115,8 +113,8 @@ public class WeekFour {
          * 
          * 
          * 1. Initialize an empty queue to hold the merged result.
-         * 2. peek the first item from each input queue.
-         * 3. Compare the peeked items.
+         * 2. dequeue the first item from each input queue.
+         * 3. Compare the dequeued items.
          * 4. Enqueue the smaller item into the result queue.
          * 5. Repeat steps 2-4 until one of the input queues is empty.
          * 6. The result queue is now the merged and sorted queue.
@@ -133,6 +131,9 @@ public class WeekFour {
          * I would use selection sort, comparing the cards first by suit, and if they have the same suit, by rank.
          * As we are dealing with physical objects it makes sense to minimize the number of swaps.
          * With selection sort it may be needed to look at more cards than insertion sort (twice as many in the average case).
+         * 
+         * The fastes way is to swap the card that has been looked at and put it in the respective place that card belongs in the deck.
+         * This is a variation of selection sort, but achieves linear algorithmic time complexity.
          */
 
 
@@ -140,15 +141,15 @@ public class WeekFour {
          * 2.2.17
          * Implement a natural mergesort for linked lists. Use only constant amount of extra space and linearithmic time.
          * 
-         * 
+         * We can split the list on the respective sorted points and change the nodes to new poins in the list. 
+         * Then at a certain point, the lists can be combined into a final one.
          */
 
 
         /*
          * 2.1.14
          * Explain how you would sort a deck of cards, with the restriction that the only allowed operations are to
-         * look at the values of the top two cards, to exchange the top two cards, and
-         * to move the top card to the bottom of the deck.
+         * look at the values of the top two cards, to exchange the top two cards, and to move the top card to the bottom of the deck.
          * 
          * 1. I would compare both top cards and, if the top card were bigger than the second card, I would swap them.
          * 2. I would mark the top card, so I could know it was the first card (in this iteration) sent to the bottom of the deck.
@@ -166,18 +167,27 @@ public class WeekFour {
          * (incrementing a pointer as long as the pointed at cell and its neighbor are sorted), then merge these into the other array. 
          * Analyze the running time in terms of the array length and the number of maximal increasing sequences in the array.
          * 
-         * 
+         * Number of items = N
+         * Groups to be merged = G
+         * Worst case is N*log2(G)
          */
 
 
         /*
          * 2.2.21
-         * Given three lexicographically sorted lists of nstrings
-         * with a total of mcharacters. Devise an algorithm that finds the
-         * lexicographically smallest string
-         * that is contained in all lists. How many string comparisons does your
-         * algorithm perform? How
-         * many character comparisons does your algorithm perform?
+         * Given three lexicographically sorted lists of nstrings with a total of mcharacters. 
+         * Devise an algorithm that finds the lexicographically smallest string that is contained in all lists. 
+         * How many string comparisons does your algorithm perform? How many character comparisons does your algorithm perform?
+         * 
+         * We can start from the bottom of each of the sorted lists and then compare the values.
+         * The smallest value lexicographically from one of the arrays is saved to a variable and the loops continues.
+         *
+         * Total amount of characters = m
+         * list of strings = n 
+         * One comparison is at minimum ´min(m1, m2)
+         * The worst case is performance of the alogrithm is 3*n for the lists.
+         * The amount of character comparisons is 3*n*m
+         * The time complexity is O(m) for the three lists since if we have m/2 for each comparison between two lists.
          */
 
 
