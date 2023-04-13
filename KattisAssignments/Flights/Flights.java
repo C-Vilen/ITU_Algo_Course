@@ -1,5 +1,6 @@
 package KattisAssignments.Flights;
 
+
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -8,6 +9,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Flights {
     static Map<Integer, String> flightPlan = new TreeMap<>();
+
     public static void main(String[] args) {
         int NFlights = StdIn.readInt();
         int MOperations = StdIn.readInt();
@@ -19,29 +21,37 @@ public class Flights {
             String destination = StdIn.readString();
             flightPlan.put(time, destination);
         }
-        String blankSpace = StdIn.readLine();
+    
         // Responding with output data based on operations
         for (int i = 0; i < MOperations; i++) {
-            String input = StdIn.readLine();
-            String[] flightOperations =  input.split(" ");
-            switch (flightOperations[0]) {
+            String operation = StdIn.readString();
+            switch (operation) {
                 case "cancel":
-                    Cancellation(flightOperations[1]);
+                    String cancel = StdIn.readString();
+                    Cancellation(cancel);
                     break;
                 case "delay":
-                    Delay(flightOperations[1], flightOperations[2]);
+                    String delay = StdIn.readString();
+                    String delay2 = StdIn.readString();
+                    Delay(delay, delay2);
                     break;
                 case "reroute":
-                    Rerouting(flightOperations[1], flightOperations[2]);   
+                    String reroute = StdIn.readString();
+                    String reroute2 = StdIn.readString();
+                    Rerouting(reroute, reroute2);   
                     break;
                 case "destination":
-                    AtDestination(flightOperations[1]);
+                    String atDest = StdIn.readString();
+                    AtDestination(atDest);
                     break;
                 case "next":
-                    NextDeparture(flightOperations[1]);
+                    String Next = StdIn.readString();
+                    nextDeparture(Next);
                     break;
                 case "count":
-                    CountFlights(flightOperations[1], flightOperations[2]);
+                    String countFli = StdIn.readString();
+                    String countFli2 = StdIn.readString();
+                    CountFlights(countFli, countFli2);
                     break;
                 default:
                     break;
@@ -98,7 +108,7 @@ public class Flights {
     }
 
     // Returns the next departure S with the destination that is bigger or equal to currentTime.
-    public static void NextDeparture(String strTime) {
+    public static void nextDeparture(String strTime) {
         int time = Integer.parseInt(strTime.replace(":", ""));
         for (Entry<Integer, String> flight : flightPlan.entrySet()) {
             if(time <= flight.getKey()) {
