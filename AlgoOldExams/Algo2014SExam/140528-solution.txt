@@ -67,7 +67,7 @@ N: ignores val == NULL case
 ##2h
 
     After line 23:
-    int L = keys.lenght
+    int L = keys.length
     if (N == L)
     {
     	Key[] tk = new (Key [])   new Object (2*L);
@@ -108,7 +108,7 @@ Comment: This seems to have been easy, no idea why
 
 ##3d
 
-    DGOIZZLA
+    DGOIZLLA
     ADGZILLO
 
 Notes:
