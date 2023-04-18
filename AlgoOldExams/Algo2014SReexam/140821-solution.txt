@@ -1,0 +1,17 @@
+140821
+======
+1a  C 
+1b  B 
+1c  C 
+1d  B 
+1e  C 
+1f  A 
+1g  C 
+2a  B 
+2c  B 
+2d  D 
+2e  C 
+2f  C 
+3a  C 
+3b  B 
+3g  A 

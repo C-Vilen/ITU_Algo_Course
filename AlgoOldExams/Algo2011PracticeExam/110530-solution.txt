@@ -1,0 +1,5 @@
+110530
+======
+
+3c has an error: all answers contain E twice
+- corrected 

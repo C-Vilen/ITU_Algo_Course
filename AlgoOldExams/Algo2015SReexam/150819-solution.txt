@@ -1,0 +1,107 @@
+150819
+======
+
+1a. Right answer: B.
+Because (N+1)+(N+2)+(N+3) = 3N + 6 ~ 3N
+
+1b. Right answer: B. In fact, (N+1)(N+1)(N+1) ~ N^3, so in particular it is big-Oh
+(Not a super-good exercise because it makes the difference between ~ and O unclear.)
+
+1c. Right answer: C.
+In fact, the answer is = N, so in particular it is ~ N.
+
+1d. Right answer: D.
+Exactly 1+...+N start are printed, which is = N(N-1)/ 2 ~ N^2/2 = O(N^2)
+
+1e. Right answer: D
+An equivalent way to give the answer is O(N^3).
+A more precise expression would be ~ N^3.
+Don't get confused by the bodies of the loops, the answer would be the same if it said A[i] = N.
+
+1f. Right answer: B
+
+1g. C
+Such a sequence has length a power of 2.
+(So that the last call activates the if-clause and leads to N stars being printed.)
+
+1h. Right answer: A
+In the best case, no stars are printed. (For instance, the empty sequence would be a perfectly valid answer. But also a length 524124135 sequence would not produce any stars after the last call. Only sequences of length a power of 2 produce stars at the last call.)
+
+1i: Right answer: C
+The total number of stars is linear in N. (In fact I think it's ~2N.)
+
+1j: Right answer: A
+This follows from i.
+
+2a: Right answer: A
+
+2b: There infinitely many correct answers. Here are some:
+int[] B = {}
+int[] B = {1}
+int[] B = {1,2,4,5,6,7,8}
+
+2c: Right answer A
+In other words, A is a subset of B.
+
+2d: Right answer: O(NM)
+
+2e: Many ways of doing this, and many ways of explaining it. Here's a very short answer that I would give full points for. "Sort B. Then scan through A linearly and use binary search [SW, page blabla] to locate A[i] in B. Total time O((N+M) log M). Even faster (in practice): build a hash table for B. Time O(N+M).".
+
+2f:
+
+Many solution, including cute ones with two pointers into sorted lists. Here's one using a symbol table:
+
+Build a symbol table for B, mapping key i to count(i). This is done by a single pass tthrough B, like this:
+
+	for (b in B): S.put(b, S.contains(b) ? S.get(b)+1 : 0)
+
+Then pass through A once, looking up each a in A and decreasing the counter.
+	
+	if (S.contains(a)): S.put(S.get(a)-1)
+	else return false
+
+Depending on the implementation of the symbol table, this takes linear time in N+M.
+
+2g:
+
+return max (A) < min (B).
+
+Linear time.
+
+
+3a. Two ways of doing it, since the exercise underspecifies the heap order. Full points for both.
+
+3b. D
+
+3c. Good luck.
+
+3d. B.
+(Recall that the asymptotic worst-case performance of both is quadratic. Insertion sort is linear on sorted input. Quicksort uses some extra space to manage the recursive calls.)
+
+3e. Good luck.
+
+4.a
+
+Something like this:
+return sort(dist(x1,y1), dist(x2,y2))  == [1,2];
+
+where dist(a,b) = abs(a-b) computes the absolute distance between its inputs.
+
+And then make proper Java out of this idea.
+
+Constant time.
+
+4b:
+Build a graph with NM vertices called (i,j) for 1<=i<=M and 1<=j<=M.
+Two vertices (x1,y1) and (x2,y2) are adjacent iff valid(N,M,x1,y1,x2,y2).
+This takes O((NM)^2) time to build naively.
+A faster way is to connect (x,y) to its 8 neighbours 
+
+	(x+1,y+2), (x-1,y+2), [and so on] , (x-2,y-1)
+
+provided they exist. Then the construction takes only O(NM) time.
+
+Now the reachability query can be answered in time O(NM) using breadth first search [SW, page blabla]. Note that the number of edges in the graph is at most 8NM.
+
+[Avoid the pitfall of answering O(N+M)!!!)
+ 

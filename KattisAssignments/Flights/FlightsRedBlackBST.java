@@ -1,14 +1,11 @@
 package KattisAssignments.Flights;
 
-
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Map.Entry;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.RedBlackBST;
 
-public class Flights {
-    static Map<Integer, String> flightPlan = new TreeMap<>();
+public class FlightsRedBlackBST {
+    static RedBlackBST<Integer, String> flightPlan = new RedBlackBST<Integer, String>();;
 
     public static void main(String[] args) {
         int NFlights = StdIn.readInt();
@@ -62,10 +59,11 @@ public class Flights {
     // Cancels the flight scheduled at the time S
     public static void Cancellation(String strTime) {
         int time = Integer.parseInt(strTime.replace(":", ""));
-        if (flightPlan.containsKey(time)) {
-            flightPlan.remove(time);
+        if (flightPlan.contains(time)) {
+            flightPlan.delete(time);
         }
     }
+    
 
     // Delays the flight scheduled for time strTime by D seconds
     public static void Delay(String strTime, String D) {
@@ -80,9 +78,9 @@ public class Flights {
         int newSeconds = newTotalSeconds % 60;
         String newStrTime = String.format("%02d:%02d:%02d", newHours, newMinutes, newSeconds);
         int time = Integer.parseInt(strTime.replace(":", ""));
-        if (flightPlan.containsKey(time)) {
+        if (flightPlan.contains(time)) {
             String destination = flightPlan.get(time);
-            flightPlan.remove(time);
+            flightPlan.delete(time);
             flightPlan.put(Integer.parseInt(newStrTime.replace(":", "")), destination);
         }
     }
@@ -91,16 +89,16 @@ public class Flights {
     // Reroutes the flight scheduled for time S to the destination newDestination
     public static void Rerouting(String strTime, String newDestination) {
         int time = Integer.parseInt(strTime.replace(":", ""));
-        if (flightPlan.containsKey(time)) {
-            String currentDestination = flightPlan.get(time);
-            flightPlan.replace(time, currentDestination, newDestination);
+        if (flightPlan.contains(time)) {
+            flightPlan.delete(time);
+            flightPlan.put(time, newDestination);
         }
     }
-
+    
     // Checks if a flight is planned for a time T and returns the destination at time T
     public static void AtDestination(String strTime) {
         int time = Integer.parseInt(strTime.replace(":", ""));
-        if (flightPlan.containsKey(time)) {
+        if (flightPlan.contains(time)) {
             StdOut.println(flightPlan.get(time));
         } else {
             StdOut.println("-");
@@ -110,27 +108,26 @@ public class Flights {
     // Returns the next departure S with the destination that is bigger or equal to currentTime.
     public static void nextDeparture(String strTime) {
         int time = Integer.parseInt(strTime.replace(":", ""));
-        for (Entry<Integer, String> flight : flightPlan.entrySet()) {
-            if(time <= flight.getKey()) {
-                String outputTime = flight.getKey().toString();
-                if (outputTime.length() == 5) outputTime = "0" + outputTime;
-                String formattedOutputTime = outputTime.substring(0,2) + ":" + outputTime.substring(2,4) + ":" + outputTime.substring(4,6);
-                StdOut.println(formattedOutputTime + " " + flight.getValue());
-                break;
-            }
-        }    
+        Integer nextDeparture = flightPlan.ceiling(time);
+        if (nextDeparture != null) {
+            String outputTime = nextDeparture.toString();
+            if (outputTime.length() == 5) outputTime = "0" + outputTime;
+            String formattedOutputTime = outputTime.substring(0,2) + ":" + outputTime.substring(2,4) + ":" + outputTime.substring(4,6);
+            StdOut.println(formattedOutputTime + " " + flightPlan.get(nextDeparture));
+        }
     }
+    
 
     // returns the number of flights scheduled between two timeslot.
     public static void CountFlights(String strTime1, String strTime2) {
         int time1 = Integer.parseInt(strTime1.replace(":", ""));
         int time2 = Integer.parseInt(strTime2.replace(":", ""));
         int counter = 0;
-        for (Entry<Integer, String> flight : flightPlan.entrySet()) {
-            if(time1 <= flight.getKey() && flight.getKey() <= time2) {
+        for (Integer time : flightPlan.keys()) {
+            if (time1 <= time && time <= time2) {
                 counter += 1;
             }
         }
         StdOut.println(counter);
-    }
+    }    
 }

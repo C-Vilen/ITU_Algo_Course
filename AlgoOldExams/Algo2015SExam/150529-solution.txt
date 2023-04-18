@@ -1,0 +1,92 @@
+150529
+======
+1a a
+1b a
+1c b
+1d c
+1e c
+1f d
+1g a
+1h b
+2a d
+2c b
+2d b
+2e d
+2f b
+3a c
+3b b
+3d d
+3g d
+
+Comments
+--------
+
+2g 
+--
+
+This is arguably underspecified. The intended meaning was the remove the element {i} from the set containing it, so that {1,3,6,8} with i = 6 becomes {1,3,8} and {6}. However, it would be consistent with the formulation in the question to split the set in three: {1,3}, {6}, {8}. In fact, nowhere does the exercise say what happens to the other sets, so turning the entire family into singletons would also solve the questions. I’ve been lenient in marking this.
+
+The fast way takes constant time, but it can be done very slowly (by linear search) as well.
+
+2h
+--
+
+Introduce a counter ctr of singletons. Intially ctr = N. With each update, ctr is decreased by 0, 1, or 2, after checking if the arguments are singletons (constant time). Then existsIsolated() is returns ctr > 0.
+
+There are linear time and even quadratic time solutions as well, they reveice 1 and 1/2 point, respectively.
+
+2i
+--
+
+Use a doubly linked cycle instead of a doubly linked list as the underlying data structure. Unioning two cycles is just a constant number of pointer manipulations. Find needs to be slightly changed as well.
+
+4a
+--
+
+Store the snakes and ladders in a symbol table T, with head/bottom as keys and tail/top as values. Let pos = 1. Iterate over the die rolls: for the ith roll, add d[i] to pos. Look up pos in T; if it exists replace it by the value stored at T[pos]. Assuming constat look-up time for T, this takes time O(r).
+
+In python:
+
+K = 30
+S= [(17,4), (21,9), (19,7), (27,1)]
+L= [(11,26), (3,22), (5,8), (20,29)]
+
+def check((K,S,L), D):
+	pos = 1
+	snadders = dict(S+L)
+	for d in D:
+		pos += d
+		if pos in snadders: pos = snadders[pos]
+	return (pos >= K)
+
+There is a far slower solution that runs linear in the graph size. I called this the “trivial solution” and have given 1 point for it.
+
+4b
+--
+
+Straight-up BFS, the only twist is to replace a vertex by the tail of its snake or head of its ladder.
+One can explain that by weight 0 edges (but then one is tempted to use Dijsktra and lose points for bad running time).
+
+Here’s the direct approach in Python:
+
+def solve((K,S,L)):
+	snadders = dict(S+L)
+
+	pred = {} # pred[pos] = (prev, die) means we got from prev to pos rolling die
+	Q = deque([1])
+	while Q:  # straight-up BFS
+		here = Q.popleft()
+		if (here >= 30): # reached the end?
+			dice = []    # init seq of die rolls used to get to here
+			while (here != 1):
+				(prev, die) = pred[here] # use pred dict to walk back
+				dice.append(die)		 # append die roll
+				here = prev
+			dice.reverse()                   
+			return dice
+		for d in [1,2,3,4,5,6]:
+			pos = here + d
+			if pos in snadders: pos = snadders[pos]
+			if not pos in pred:
+				pred[pos] = (here,d)
+				Q.append(pos)
