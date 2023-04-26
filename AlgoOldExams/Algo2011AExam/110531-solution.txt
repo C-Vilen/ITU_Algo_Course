@@ -1,0 +1,28 @@
+
+
+
+1B: B
+
+1C: C
+
+1D: A
+
+2A: C
+
+2B: A
+
+2C: A
+
+2D: C
+
+2E: A
+
+2F: B
+
+2G: a
+
+2H: 
+The worst sequence I can think of is K/2 insertions followed by K/2 removals, since remove is the most expensive method in the class. 
+The amortized cost per operation (counting both remove and insert operations) will then be 
+∼ (K/2)^2/2 = K^2/4K = K/4, since the cost of the remove operations will dominate the running time as K grows. 
+Thus, the amortized cost per operation must be linear in K.

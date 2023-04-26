@@ -1,0 +1,14 @@
+
+1B: C
+Since f grows slower than g asymptotically, which is allowed with Big O notation.
+
+1D: D
+
+1E: A
+
+
+3I: 
+    0: [X,7]
+    1: [M,9], [E,6], [A,8]
+    2: [N,4], [B,0]
+    3:

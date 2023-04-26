@@ -45,13 +45,14 @@ In other words, A is a subset of B.
 
 2d: Right answer: O(NM)
 
-2e: Many ways of doing this, and many ways of explaining it. Here's a very short answer that I would give full points for. "Sort B. Then scan through A linearly and use binary search [SW, page blabla] to locate A[i] in B. Total time O((N+M) log M). Even faster (in practice): build a hash table for B. Time O(N+M).".
+2e: Many ways of doing this, and many ways of explaining it. Here's a very short answer that I would give full points for. 
+"Sort B. Then scan through A linearly and use binary search [SW, page blabla] to locate A[i] in B. Total time O((N+M) log M). 
+Even faster (in practice): build a hash table for B. Time O(N+M).".
 
 2f:
-
-Many solution, including cute ones with two pointers into sorted lists. Here's one using a symbol table:
-
-Build a symbol table for B, mapping key i to count(i). This is done by a single pass tthrough B, like this:
+Many solutions, including cute ones with two pointers into sorted lists. Here's one using a symbol table:
+Build a symbol table for B, mapping key i to count(i). 
+This is done by a single pass through B, like this:
 
 	for (b in B): S.put(b, S.contains(b) ? S.get(b)+1 : 0)
 
@@ -63,7 +64,6 @@ Then pass through A once, looking up each a in A and decreasing the counter.
 Depending on the implementation of the symbol table, this takes linear time in N+M.
 
 2g:
-
 return max (A) < min (B).
 
 Linear time.
