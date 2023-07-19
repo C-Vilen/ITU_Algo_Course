@@ -1,0 +1,121 @@
+220812
+=======
+
+Analysis of algorithms
+1A: B
+
+1B: A
+
+
+1C: B
+
+1D: D
+
+1E: B
+
+1F: A
+
+1G: B
+
+1H: C
+
+
+
+
+
+Mystery class M - A linkedlist
+
+2A: First -> [-3] -> [4] -> [-2] -> [6] <- cur
+
+StdOut.print(m.getNextPositive()); = 4
+StdOut.print(", ");
+StdOut.print(m.getNextPositive()); = 6
+
+Output = "4, 6"
+
+2B: First -> [-3] -> [4] -> [-2] -> [6] <- cur
+
+2C: C
+
+2D: C
+
+2E: C
+
+2F: C
+
+2G:
+public int pop() {
+     val = self.first.val
+     if first (self.first = null) {
+        throw error
+     } else { 
+        self.first = self.first.next;
+     }
+     return val;
+}
+
+2H:
+public boolean hasTwoNextPositive() {
+    Node originalCur = cur;
+    try {
+        getNextPositive();
+        getNextPositive();
+        return true;
+    } catch e {
+        return false;
+    } finally {
+        cur = originalCur;
+    }
+}
+
+2I:
+Yes, we could add a global variable for the class M that would be incremented in the insert method once a positive number would be added.
+Hence, a call to a new method hasTwoNextPositive should simply check if the global variable was bigger than 1 and then return true.
+
+
+
+
+
+Operation of common algorithms and data structures.
+
+3A: D -> F
+
+3B: G -> E
+
+3C: A -> e
+
+3D: B
+
+3E: B
+
+3F: 
+Formula: (2x) mod 11
+5 = 10
+6 = 1
+19 = 5
+16 = 10
+
+hash table = [(0,33), (1, 6), (2, 16), (3, null), (4, null), (5, 30), (6, 19), (7,42), (8, null), (9, null), (10, 5)]
+
+3G: 
+     19
+    /  \
+   10    7
+  /   \
+3      9
+
+
+
+
+Design of algorithms: Weighted graph
+
+4A: 
+Construct an undirected weighted graph with vertices that do not have a temperature above Marie's tolerance of t.
+Now add the length of each street between the vertices and use djikstra to find the shortest path between her starting point and end location.
+Running time will be O(N*log(N))
+
+4B:
+
+
+
+4C:

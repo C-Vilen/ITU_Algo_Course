@@ -12,3 +12,47 @@ Since f grows slower than g asymptotically, which is allowed with Big O notation
     1: [M,9], [E,6], [A,8]
     2: [N,4], [B,0]
     3:
+
+
+
+
+
+
+4A:
+int[] = one-dimensional array T[c];
+
+boolean lava = false;
+int perhapsWaterLevel = 0
+int neededWaterLavel = 0
+
+ For elements in array
+    if (gras_tile) {
+        if (lava = false) {
+            neededWaterLavel = perhapsWaterLevel
+        }
+    }
+    else if (water_tile) {
+        perhapsWaterLevel = water_tileLevel
+    }
+    else if (lava_tile) {
+        lava = true
+    }
+return neededWaterLavel;
+
+Time complexity of O(N_elements)
+
+
+4B:
+Turn  two-dimensional array T[r][c] of integers into weighted undirected graph.
+Lava tiles will be not be considered in the graph.
+Gras tiles will have edge weigth of 0.
+Water tiles will have an edge weigth equal to its waterlevel, 
+where the highest number will be considered between two nodes.
+Use depth-first search or breadth-first search to check if there is any isolated vertices.
+Use prim's algorithm to find the minimum weighted edge between all vertices.
+return minimum weighted edge that creates the MST.
+
+Number of vertices is smaller or equal to R*C.
+Prims algorithm is (R*C) * log(R*C)
+Time complexity is O((R*C) * log((R*C)))
+
