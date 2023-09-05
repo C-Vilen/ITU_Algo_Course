@@ -112,7 +112,7 @@ Design of algorithms: Weighted graph
 4A: 
 Construct an undirected weighted graph with vertices that do not have a temperature above Marie's tolerance of t.
 Now add the length of each street between the vertices and use djikstra to find the shortest path between her starting point and end location.
-Running time will be O(N*log(N))
+Running time will be O(e*log(V))
 
 4B:
 

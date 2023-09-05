@@ -33,15 +33,18 @@ public class test {
         return val;
     }
 
+    public void pprint(){
+        Node n = first;
+        while (n != null){
+            System.out.print(n.val + " ");
+            System.out.println("cur: " + cur.val);
+            n = n.next;
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        test t = new test();
-        t.insert(6);
-        t.insert(-2);
-        t.insert(4);
-        t.insert(-3);
-        System.out.print(t.getNextPositive());
-        System.out.print(", ");
-        System.out.print(t.getNextPositive());
+        System.out.println(5/2);
     }
 }
 
