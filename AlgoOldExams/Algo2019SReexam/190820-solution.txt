@@ -1,11 +1,27 @@
 
-1B: C
+1B: B
 Since f grows slower than g asymptotically, which is allowed with Big O notation.
+
+1C: B
 
 1D: D
 
 1E: A
 
+1F: C
+
+2C: B
+
+2D: D
+
+2E: 
+    static int g(List<Double> L) {
+
+          return L.Size() - f(L);
+
+    }
+
+3E: C
 
 3I: 
     0: [X,7]
@@ -13,7 +29,9 @@ Since f grows slower than g asymptotically, which is allowed with Big O notation
     2: [N,4], [B,0]
     3:
 
+3J: A
 
+3K: A
 
 
 

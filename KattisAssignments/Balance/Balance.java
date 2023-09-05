@@ -1,4 +1,4 @@
-package KattisAssignments.Balance;
+
 
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdIn;
